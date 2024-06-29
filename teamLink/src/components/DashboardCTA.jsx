@@ -3,7 +3,7 @@ import reactImg from "../assets/react.svg";
 const DashboardCTA = () => {
   return (
     <>
-      <div className="bg-transparent">
+      <div className="bg-transparent mt-28 ">
         <div className="mx-auto max-w-7xl px-6 lg:px-8 pb-6">
           <div className="mx-auto mt-10 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-10 lg:mx-0 lg:flex lg:max-w-none bg-white">
             <div className="p-8 sm:p-10 lg:flex-auto">
