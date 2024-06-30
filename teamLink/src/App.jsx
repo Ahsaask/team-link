@@ -1,22 +1,28 @@
-import Navbar from "./components/Navbar";
-import grad from "./assets/gradient.png"
-import DashboardCTA from "./components/DashboardCTA";
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
+import HomePage from "./pages/HomePage";
 
-DashboardCTA
+import MainLayout from "./layouts/MainLayout"
+import JobsPage from "./pages/JobsPage";
+import NotFound from "./pages/NotFound";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<MainLayout/>}>  
+      <Route index element={<HomePage/>} />
+      <Route path='/projects' element={<JobsPage/>}/>
+      <Route path='*' element={<NotFound/>}/>
+      
+    </Route>
+)
+);
 
 const App = () => {
-  return (
-    <>
-      <div className="bg-white h-screen w-full">
-        
-      <img className=" absolute w-[1440px] h-[616px] top-0" src={grad}/>
-        <Navbar />
-        
-        <DashboardCTA/>
-
-      </div>
-    </>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
