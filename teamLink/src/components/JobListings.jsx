@@ -7,23 +7,37 @@ const JobListings = ({ isHome = false }) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => { 
+  useEffect(() => {
     const fetchJobs = async () => {
-      const ApiURl = isHome ? "/api/jobs?_limit=3" : "/api/jobs"
+      const ApiURl = isHome ? "/api/jobs?_limit=3" : "/api/jobs";
+      const BASE_URL = 'https://team-link-fujc3hj0d-ahsaas-projects.vercel.app';
 
       try {
-        const res = await fetch(`${ApiURl}`);
+        const res = await fetch(`${BASE_URL}${ApiURl}`);
         const data = await res.json();
-        setJobs(data);
+        if (Array.isArray(data)) {
+          setJobs(data);
+        } else {
+          console.error('Data fetched is not an array:', data);
+        }
       } catch (error) {
-        console.log("Error fetching data for", error);
+        console.log("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchJobs();
-  }, []);
+  }, [isHome]);
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!Array.isArray(jobs)) {
+    return <div>Error: Jobs data is not an array</div>;
+  }
 
   return (
     <section className="bg-white px-4 py-10">

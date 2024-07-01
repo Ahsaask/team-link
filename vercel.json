@@ -2,14 +2,23 @@
   "version": 2,
   "builds": [
     {
+      "src": "teamLink/backend/server.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "teamLink/package.json",
       "use": "@vercel/static-build"
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "teamLink/backend/server.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "teamLink/$1"
     }
   ]
 }
+
